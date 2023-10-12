@@ -162,6 +162,7 @@ class UserController extends Controller
                     ]
                 ], 400);
             }
+            $user->tokens()->delete();
             $user->delete();
             DB::commit();
             return response()->json([

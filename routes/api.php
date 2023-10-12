@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/register-user', [AuthUserController::class, 'registerUser'])->name('register-user');
-Route::post('/login', [AuthUserController::class, 'generateAuthToken'])->name('generate-token');
+Route::post('login', [AuthUserController::class, 'generateAuthToken'])->name('generate-token');
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -26,4 +26,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/update-user', [UserController::class, 'updateUser'])->name('update-user');
+    Route::get('/delete-user/{userId}', [UserController::class, 'deleteUser'])->name('delete-user');
 });
