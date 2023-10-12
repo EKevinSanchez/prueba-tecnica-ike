@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
         'email',
         'password',
@@ -42,4 +43,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Function to set the expiration time of the token
+     */
+    public function withAccessToken($token)
+    {
+        $token->expires_at = now()->addMinutes(5);
+        return $this->tokens()->save($token);
+    }
+
 }
+
